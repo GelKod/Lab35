@@ -128,64 +128,93 @@ namespace Lab3
             }
             return grid;
         }
-        static bool GameProcess(string[,] mask, int[,] grid, bool gameOver)
+        public bool GameProcess(string[,] mask, int[,] grid, bool gameOver)
         {
-            for (int i = 0; i < mask.GetLength(0); i++)
-            {
-                for (int j = 0; j < mask.GetLength(1); j++)
-                {
-                    Console.Write(" " + mask[i, j]);
-                }
-                Console.WriteLine();
-            }
+            FieldMin(mask);
             Console.WriteLine();
             while (!gameOver)
             {
-                Console.Write("Введите номер клетки (Строка, столбец): ");
-                string[] coords = Console.ReadLine().Split();
-                int x = int.Parse(coords[0]);
-                int y = int.Parse(coords[1]);
+                int x = 0, y = 0;
+                bool chek = false;
+                bool proverka = false;
+                //Console.Write("Введите номер клетки (Строка, столбец): ");
+                while (!proverka)
+                {
+                    proverka = true;
+                    x = InPutCoordinateNew();
+                    y = InPutCoordinateNew();
+                    if (!(mask[x - 1, y - 1] == "*"))
+                    {
+                        Console.WriteLine("Эта ячейка занята");
+                        proverka = false;
+                    }
+                }
                 if (grid[x - 1, y - 1] != 9)
                 {
                     Console.Clear();
                     mask[x - 1, y - 1] = grid[x - 1, y - 1].ToString();
-                    for (int i = 0; i < mask.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < mask.GetLength(1); j++)
-                        {
-                            Console.Write(" " + mask[i, j]);
-                        }
-                        Console.WriteLine();
-                    }
+                    FieldMin(mask);
+                    Console.WriteLine();
                 }
                 else
                 {
                     Console.Clear();
                     mask[x - 1, y - 1] = grid[x - 1, y - 1].ToString();
-                    for (int i = 0; i < mask.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < mask.GetLength(1); j++)
-                        {
-                            Console.Write(" " + mask[i, j]);
-                        }
-                        Console.WriteLine();
-                    }
-                    Console.WriteLine();
+                    FieldMin(mask);
                     Console.WriteLine("Вы попали на клетку с миной! Попробуйте снова!");
                     gameOver = true;
                 }
+                chek = true;
             }
             return gameOver;
         }
         public void Game()
         {
-            Console.Clear ();
+            Console.Clear();
             int[,] grid = GenerateGrid();
             string[,] mask = MaskGrid();
             grid = FormatGrid(grid);
             bool game = false;
             game = GameProcess(mask, grid, game);
             Console.ReadKey();
+        }
+        public int InPutCoordinateNew()
+        {
+            int inputx = 0;
+            bool enterY = false;
+            while (!enterY)
+            {
+                Console.Write("Введите расположение по (1)Y (2)X: ");
+                enterY = int.TryParse(Console.ReadLine(), out inputx);
+                if (!enterY)
+                {
+                    Console.WriteLine("Вы ввели неверное значение");
+                }
+                else if (inputx > 10 || inputx < 1)
+                {
+                    Console.WriteLine("Введите значение от 1 до 10");
+                    enterY = false;
+                }
+            }
+            return inputx;
+        }
+        public void FieldMin(string[,] arr)
+        {
+            Console.WriteLine("   1 2 3 4 5 6 7 8 9 10 <- x");
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                Console.Write(i + 1);
+                if (!(i + 1 == 10))
+                {
+                    Console.Write(" ");
+                }
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    Console.Write(" " + arr[i, j]);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("^\r\n|\r\ny");
         }
     }
 }

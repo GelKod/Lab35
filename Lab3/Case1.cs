@@ -61,7 +61,7 @@ namespace Lab3
                     Console.WriteLine("Ответ не правильный.\r\nПопытки: " + num);
                 }
             }
-            if (!(num == -4))
+            if (!(num == -5))
             {
                 Console.WriteLine("Вы проиграли(((");
                 Console.WriteLine("Правильный ответ: " + f + "\r\n");

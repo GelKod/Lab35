@@ -11,42 +11,55 @@ namespace Lab3
         public void Programm()
         {
             bool cikl = false;
+
             while (!cikl)
             {
                 Console.Clear();
                 Console.WriteLine("1 – Отгадай ответ\r\n2 – Об авторе (Фамилия И.О., группа)\r\n" +
-                    "3 - Сортировка\r\n4 - Крестики нолики\r\n5 - Сапёр \r\n6 – Выход");
-                int vibor = Helper.InPutInt();
-                switch (vibor)
+                    "3 - Сортировка\r\n4 - Крестики нолики\r\n5 - Сапёр \r\n6 - Чаровские строчки\r\n7 – Выход");
+
+                switch (Console.ReadKey().Key)
                 {
-                    case 1:
+                    case ConsoleKey.D1:
                         Case1 c1 = new Case1();
                         c1.Exzample();
                         break;
-                    case 2:
+
+                    case ConsoleKey.D2:
                         Case2 c2 = new Case2();
                         c2.Info();
                         break;
-                    case 3:
+
+                    case ConsoleKey.D3:
                         Case3 c3 = new Case3();
                         c3.Sort();
                         break;
-                    case 4:
+
+                    case ConsoleKey.D4:
                         Case4 c4 = new Case4();
                         c4.NoughtsAndCrosses();
                         break;
-                    case 5:
+
+                    case ConsoleKey.D5:
                         Case7 c7 = new Case7();
                         c7.Game();
                         break;
-                    case 6:
+
+                    case ConsoleKey.D6:
+                        Case8 c8 = new Case8();
+                        c8.CharNumber();
+                        break;
+
+                    case ConsoleKey.D7:
                         Case6 c6 = new Case6();
                         cikl = c6.OutMeny();
                         break;
+
                     default:
                         Err er = new Err();
                         er.Error();
                         break;
+
                 }
             }
         }
