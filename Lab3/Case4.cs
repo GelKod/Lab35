@@ -136,9 +136,5 @@ namespace Lab3
             }
             return game;
         }
-        public void SquareCheck()
-        {
-
-        }
     }
 }

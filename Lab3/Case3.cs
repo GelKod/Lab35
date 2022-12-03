@@ -92,7 +92,6 @@ namespace Lab3
             }
             return b;
         }
-
         public void OutPutMas(int[] d)
         {
             if (d.Length < 100)
