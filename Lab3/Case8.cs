@@ -15,19 +15,15 @@ namespace Lab3
                 "2 - Посчитать количество знаков препинания в строке.\r\n" +
                 "3 - Вывести на экран, сколько первых символов этих строк совпадают.");
             int choose = 0;
-            while (choose>3||choose<1)
+            switch (Console.ReadKey().Key)
             {
-                choose = Helper.InPutInt();
-            }
-            switch (choose)
-            {
-                case 1:
+                case ConsoleKey.D1:
                     N1();
                     break;
-                case 2:
+                case ConsoleKey.D4:
                     N2();
                     break;
-                case 3:
+                case ConsoleKey.D8:
                     N3();
                     break;
                 default:
@@ -91,17 +87,13 @@ namespace Lab3
             int[] arr = { 0, 0 };
             int choos = 0;
             Console.WriteLine("1 - Использовать текст из методички\r\n2 - Ввести свой текст");
-            while (choos > 2 || choos < 1)
+            switch (Console.ReadKey().Key)
             {
-                choos = Helper.InPutInt();
-            }
-            switch (choos)
-            {
-                case 1:
+                case ConsoleKey.D1:
                     string oneNumber = Txt();
                     arr = Number1(oneNumber);
                     break;
-                case 2:
+                case ConsoleKey.D2:
                     oneNumber = Console.ReadLine();
                     arr = Number1(oneNumber);
                     break;
@@ -114,17 +106,13 @@ namespace Lab3
             int prepinaniya = 0;
             Console.WriteLine("1 - Использовать текст из методички\r\n2 - Ввести свой текст");
             int choos = 0;
-            while (choos > 2 || choos < 1)
+            switch (Console.ReadKey().Key)
             {
-                choos = Helper.InPutInt();
-            }
-            switch (choos)
-            {
-                case 1:
+                case ConsoleKey.D1:
                     string oneNumber = Txt();
                     prepinaniya = Number2(oneNumber);
                     break;
-                case 2:
+                case ConsoleKey.D2:
                     oneNumber = Console.ReadLine();
                     prepinaniya = Number2(oneNumber);
                     break;
@@ -136,19 +124,15 @@ namespace Lab3
             Console.Clear();
             Console.WriteLine("1 - Использовать текст из методички\r\n2 - Ввести свой текст");
             int choos = 0;
-            while (choos > 2 || choos < 1)
-            {
-                choos = Helper.InPutInt();
-            }
             int shodstva = 0;
-            switch (choos)
+            switch (Console.ReadKey().Key)
             {
-                case 1:
+                case ConsoleKey.D1:
                     string firstTwoNumber = "Быть может, вся Природа\r\n– мозаика цветов?";
                     string secondTwoNumber = "Быть может, вся Природа\r\n– различность голосов?";
                     shodstva = Number3(firstTwoNumber, secondTwoNumber);
                     break;
-                case 2:
+                case ConsoleKey.D2:
                     firstTwoNumber = Console.ReadLine();
                     secondTwoNumber = Console.ReadLine();
                     shodstva = Number3(firstTwoNumber, secondTwoNumber);
