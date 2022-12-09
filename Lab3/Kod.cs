@@ -21,8 +21,7 @@ namespace Lab3
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.D1:
-                        Case1 c1 = new Case1();
-                        c1.Exzample();
+                        Case1.Exzample();
                         break;
 
                     case ConsoleKey.D2:

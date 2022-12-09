@@ -8,12 +8,13 @@ namespace Lab3
 {
     internal class Case3
     {
+        private int _kol;
         public void Sort()
         {
             Console.Clear();
             Console.WriteLine("Введите сколько чисел в массиве arr: ");
-            int kolVo = InPutQuantityMas();
-            int[] array = MasRand(kolVo);
+            _kol = InPutQuantityMas();
+            int[] array = MasRand(_kol);
             OutPutMas(array);
             int[] arr2 = Transfer(array);
             DateTime dateTime = DateTime.Now;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-    internal class Case1
+    public static class Case1
     {
-        public void Exzample()
+        public static void Exzample()
         {
             Console.Clear();
             Console.WriteLine("У вас 3 попытки");
@@ -21,7 +21,7 @@ namespace Lab3
             Happy(f);
             Console.ReadKey();
         }
-        public double DivisionByZero()
+        static double DivisionByZero()
         {
             double b = 0;
             bool chek = false;
@@ -43,7 +43,7 @@ namespace Lab3
             }
             return b;
         }
-        public void Happy(double f)
+        static void Happy(double f)
         {
             int num;
             for (num = 2; num > -1; num--)
@@ -67,7 +67,7 @@ namespace Lab3
                 Console.WriteLine("Правильный ответ: " + f + "\r\n");
             }
         }
-        public double TheEquation(double l, double c)
+        static double TheEquation(double l, double c)
         {
             double qwest = (Math.Pow(Math.Cos(Math.PI), 7.0) + Math.Sqrt(Math.Log(Math.Pow(c, 4.0))))
                 / (Math.Sin(Math.Pow((Math.PI) / 2.0 + l, 2.0)));

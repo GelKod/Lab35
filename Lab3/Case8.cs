@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,45 +11,53 @@ namespace Lab3
     {
         public void CharNumber()
         {
-            Console.Clear();
-            Console.WriteLine("1 - Посчитать количество строчных и прописных букв в строке (отдельно).\r\n" +
-                "2 - Посчитать количество знаков препинания в строке.\r\n" +
-                "3 - Вывести на экран, сколько первых символов этих строк совпадают.");
-            int choose = 0;
-            switch (Console.ReadKey().Key)
+            bool reload = false;
+            while (!reload)
             {
-                case ConsoleKey.D1:
-                    N1();
-                    break;
-                case ConsoleKey.D4:
-                    N2();
-                    break;
-                case ConsoleKey.D8:
-                    N3();
-                    break;
-                default:
-                    Err er1 = new Err();
-                    er1.Error();
-                    break;
+                Console.Clear();
+                reload = true;
+                Console.WriteLine("1 - Посчитать количество строчных и прописных букв в строке (отдельно).\r\n" +
+                    "4 - Посчитать количество знаков препинания в строке.\r\n" +
+                    "8 - Вывести на экран, сколько первых символов этих строк совпадают.");
+                int choose = 0;
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.D1:
+                        N1();
+                        break;
+                    case ConsoleKey.D4:
+                        N2();
+                        break;
+                    case ConsoleKey.D8:
+                        N3();
+                        break;
+                    default:
+                        Err er1 = new Err();
+                        er1.Error();
+                        reload = false;
+                        break;
+                }
+                Console.ReadKey();
             }
-            Console.ReadKey();
         }
-        public int Number3(string stroka, string stroka2)
+        public void Number3(string stroka, string stroka2)
         {
             int shodstva = 0;
             char[] mas2 = stroka.ToCharArray();
             char[] mas3 = stroka2.ToCharArray();
             if (mas2.Length <= mas3.Length)
             {
-                Count(mas2, mas3);
+                shodstva=Count(mas2, mas3);
             }
             else
             {
-                Count(mas3, mas2);
+                shodstva=Count(mas3, mas2);
             }
-            return shodstva;
+            Console.WriteLine();
+            Console.WriteLine("Oтвет: " + shodstva);
+
         }
-        public int Number2(string stroka)
+        public void Number2(string stroka)
         {
             int prepinaniya = 0;
             char[] mas = stroka.ToCharArray();
@@ -59,9 +68,10 @@ namespace Lab3
                     prepinaniya++;
                 }
             }
-            return prepinaniya;
+            Console.WriteLine();
+            Console.WriteLine("Oтвет: " + prepinaniya);
         }
-        public int[] Number1(string stroka)
+        public void Number1(string stroka)
         {
             int propis = 0, stroch = 0;
             char[]mas = stroka.ToCharArray();
@@ -76,73 +86,96 @@ namespace Lab3
                     stroch++;
                 }
             }
-            int[] mas2 = new int[2];
-            mas2[0] = propis;
-            mas2[1] = stroch;
-            return mas2;
+            Console.WriteLine();
+            Console.WriteLine("Заглавных: " +stroch + "\r\nПрописных: " + propis);
         }
         public void N1()
         {
             Console.Clear();
             int[] arr = { 0, 0 };
-            int choos = 0;
             Console.WriteLine("1 - Использовать текст из методички\r\n2 - Ввести свой текст");
-            switch (Console.ReadKey().Key)
+            string oneNumber = Txt();
+            Console.WriteLine("Текст из методички: ");
+            Console.WriteLine(oneNumber);
+            bool choos = false;
+            while (!choos)
             {
-                case ConsoleKey.D1:
-                    string oneNumber = Txt();
-                    arr = Number1(oneNumber);
-                    break;
-                case ConsoleKey.D2:
-                    oneNumber = Console.ReadLine();
-                    arr = Number1(oneNumber);
-                    break;
+                choos = true;
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.D1:
+                        Number1(oneNumber);
+                        break;
+                    case ConsoleKey.D2:
+                        oneNumber = Console.ReadLine();
+                        Number1(oneNumber);
+                        break;
+                    default:
+                        choos = false;
+                        break;
+                }
             }
-            Console.WriteLine("Заглавных: " + arr[1] + "\r\nПрописных" + arr[0]);
         }
         public void N2()
         {
             Console.Clear();
             int prepinaniya = 0;
             Console.WriteLine("1 - Использовать текст из методички\r\n2 - Ввести свой текст");
-            int choos = 0;
-            switch (Console.ReadKey().Key)
+            bool choos = false;
+            string oneNumber = Txt();
+            Console.WriteLine("Текст из методички: ");
+            Console.WriteLine(oneNumber);
+            while (!choos)
             {
-                case ConsoleKey.D1:
-                    string oneNumber = Txt();
-                    prepinaniya = Number2(oneNumber);
-                    break;
-                case ConsoleKey.D2:
-                    oneNumber = Console.ReadLine();
-                    prepinaniya = Number2(oneNumber);
-                    break;
+                choos = true;
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.D1:
+                        Number2(oneNumber);
+                        break;
+                    case ConsoleKey.D2:
+                        oneNumber = Console.ReadLine();
+                        Number2(oneNumber);
+                        break;
+                    default:
+                        choos = false;
+                        break;
+                }
             }
-            Console.WriteLine("Oтвет: " + prepinaniya);
         }
         public void N3()
         {
             Console.Clear();
             Console.WriteLine("1 - Использовать текст из методички\r\n2 - Ввести свой текст");
-            int choos = 0;
             int shodstva = 0;
-            switch (Console.ReadKey().Key)
+            string firstTwoNumber = "Быть может, вся Природа\r\n– мозаика цветов?";
+            string secondTwoNumber = "Быть может, вся Природа\r\n– различность голосов?";
+            Console.WriteLine("Текст из методички: ");
+            Console.WriteLine(firstTwoNumber);
+            Console.WriteLine(secondTwoNumber);
+            bool choos = false;
+            while (!choos)
             {
-                case ConsoleKey.D1:
-                    string firstTwoNumber = "Быть может, вся Природа\r\n– мозаика цветов?";
-                    string secondTwoNumber = "Быть может, вся Природа\r\n– различность голосов?";
-                    shodstva = Number3(firstTwoNumber, secondTwoNumber);
-                    break;
-                case ConsoleKey.D2:
-                    firstTwoNumber = Console.ReadLine();
-                    secondTwoNumber = Console.ReadLine();
-                    shodstva = Number3(firstTwoNumber, secondTwoNumber);
-                    break;
+                choos = true;
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.D1:
+                        Number3(firstTwoNumber, secondTwoNumber);
+                        break;
+                    case ConsoleKey.D2:
+                        firstTwoNumber = Console.ReadLine();
+                        secondTwoNumber = Console.ReadLine();
+                        Number3(firstTwoNumber, secondTwoNumber);
+                        break;
+                    default :
+                        choos = false;
+                        break;
+                }
             }
-            Console.WriteLine("Oтвет: " + shodstva);
         }
         public string Txt()
         {
-            string text = "Строка 1:\r\nВаркалось. Хливкие шорьки\r\nПырялись по наве,\r\n" +
+            string text = "Варкалось. Хливкие шорьки\r\nПырялись по наве,\r\n" +
                 "И хрюкотали зелюки,\r\nКак мюмзики в мове.\r\nО бойся Бармаглота, сын!\r\n" +
                 "Он так свирлеп и дик,\r\nА в глуще рымит исполин - Злопастный Брандашмыг.";
             return text;
@@ -158,7 +191,7 @@ namespace Lab3
                 }
                 else
                 {
-                    i = 100;
+                    i=arr.Length;
                 }
             }
             return count;
