@@ -28,51 +28,46 @@ namespace Lab3
         }
         public void TicTacToe(string[,] arr)
         {
-            for (int game = 0; game < 10; game++)
+            int game = 0;
+            for (game = 2; game < 11; game++)
             {
                 Console.Clear();
-                Pole(arr);
-                int vvodX = 0, vvodY = 0;
-                bool proverka = false;
-                Console.WriteLine("Ход для Х");
-                while (!proverka)
+                string sign;
+                if (game % 2 == 0)
                 {
-                    proverka = true;
-                    vvodX = InPutCoordinate();
-                    vvodY = InPutCoordinate();
-                    if (!(arr[vvodX - 1, vvodY - 1] == "."))
-                    {
-                        Console.WriteLine("Эта ячейка занята");
-                        proverka = false;
-                    }
+                    sign = "x";
                 }
-                arr[vvodX - 1, vvodY - 1] = "x";
-                game = ProvPob(arr, game);
-                Pole(arr);
-                if (game == 11)
+                else
                 {
-                    break;
+                    sign = "o";
                 }
-                int vvodX1 = 0, vvodY1 = 0;
-                proverka = false;
-                Console.WriteLine("Ход для O");
-                while (!proverka)
-                {
-                    proverka = true;
-                    vvodX1 = InPutCoordinate();
-                    vvodY1 = InPutCoordinate();
-                    if (!(arr[vvodX1 - 1, vvodY1 - 1] == "."))
-                    {
-                        Console.WriteLine("Эта ячейка занята");
-                        proverka = false;
-                    }
-                }
-                arr[vvodX1 - 1, vvodY1 - 1] = "o";
                 Pole(arr);
-                game = ProvPob(arr, game);
-                Console.WriteLine("Нажмите любую клавишу");
-                Console.ReadKey();
+                arr = Move(sign, arr);
+                game = ProvPob(arr, sign, game);
             }
+            if (game != 13)
+            {
+                Console.WriteLine("Победила дружба!!!");
+            }
+        }
+        public string[,] Move(string gin, string[,] mas)
+        {
+            int vvodX1 = 0, vvodY1 = 0;
+            bool proverka = false;
+            Console.WriteLine("Ход для "+gin);
+            while (!proverka)
+            {
+                proverka = true;
+                vvodX1 = InPutCoordinate();
+                vvodY1 = InPutCoordinate();
+                if (!(mas[vvodX1 - 1, vvodY1 - 1] == "."))
+                {
+                    Console.WriteLine("Эта ячейка занята");
+                    proverka = false;
+                }
+            }
+            mas[vvodX1 - 1, vvodY1 - 1] = gin;
+            return mas;
         }
         public void Pole(string[,] arr)
         {
@@ -108,31 +103,31 @@ namespace Lab3
             }
             return inputx;
         }
-        public int ProvPob(string[,] arr, int game)
+        public int ProvPob(string[,] arr, string gid, int game)
         {
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 if (arr[i, 0] == arr[i, 1] && arr[i, 0] == arr[i, 2] && !(arr[i, 0] == "."))
                 {
 
-                    Console.WriteLine("Вы выиграли");
-                    game = 11;
+                    Console.WriteLine("Победа за " + gid);
+                    game = 13;
                 }
                 if (arr[0, i] == arr[1, i] && arr[0, i] == arr[2, i] && !(arr[0, i] == "."))
                 {
-                    Console.WriteLine("Вы выиграли");
-                    game = 11;
+                    Console.WriteLine("Победа за " + gid);
+                    game = 13;
                 }
             }
             if (arr[0, 0] == arr[1, 1] && arr[0, 0] == arr[2, 2] && !(arr[1, 1] == "."))
             {
-                Console.WriteLine("Вы выиграли");
-                game = 11;
+                Console.WriteLine("Победа за " + gid);
+                game = 13;
             }
             if (arr[0, 2] == arr[1, 1] && arr[0, 2] == arr[2, 0] && !(arr[1, 1] == "."))
             {
-                Console.WriteLine("Вы выиграли");
-                game = 11;
+                Console.WriteLine("Победа за " + gid);
+                game = 13;
             }
             return game;
         }
