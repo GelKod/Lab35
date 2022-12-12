@@ -45,7 +45,7 @@ namespace Lab3
                 arr = Move(sign, arr);
                 game = ProvPob(arr, sign, game);
             }
-            if (game != 13)
+            if (game == 11)
             {
                 Console.WriteLine("Победила дружба!!!");
             }
