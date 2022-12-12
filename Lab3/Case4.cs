@@ -58,8 +58,10 @@ namespace Lab3
             while (!proverka)
             {
                 proverka = true;
-                vvodX1 = InPutCoordinate();
-                vvodY1 = InPutCoordinate();
+                int schet = 0;
+                vvodX1 = InPutCoordinate(schet);
+                schet++;
+                vvodY1 = InPutCoordinate(schet);
                 if (!(mas[vvodX1 - 1, vvodY1 - 1] == "."))
                 {
                     Console.WriteLine("Эта ячейка занята");
@@ -83,13 +85,20 @@ namespace Lab3
             }
             Console.WriteLine("^\r\n|\r\ny");
         }
-        public int InPutCoordinate()
+        public int InPutCoordinate(int aboba)
         {
             int inputx = 0;
             bool enterY = false;
             while (!enterY)
             {
-                Console.Write("Введите расположение по (1)Y (2)X: ");
+                if (aboba % 2 == 0)
+                {
+                    Console.Write("Введите номер строки: ");
+                }
+                else
+                {
+                    Console.Write("Введите номер столбца: ");
+                }
                 enterY = int.TryParse(Console.ReadLine(), out inputx);
                 if (!enterY)
                 {
