@@ -8,6 +8,10 @@ namespace Lab3
 {
     internal class Case6
     {
+        /// <summary>
+        /// Выход из программы
+        /// </summary>
+        /// <returns></returns>
         public bool OutMeny()
         {
             bool cikl = false;

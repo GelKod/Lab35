@@ -8,9 +8,15 @@ namespace Lab3
 {
     internal class Case7
     {
+        const int _x = 10;
+        const string _xx = "   1 2 3 4 5 6 7 8 9 10 <- x";
+        /// <summary>
+        /// Создание поля с рандомными числами
+        /// </summary>
+        /// <returns></returns>
         static int[,] GenerateGrid()
         {
-            int[,] grid = new int[10, 10];
+            int[,] grid = new int[_x, _x];
             Random rng = new Random();
             for (int x = 0; x < grid.GetLength(0); x++)
             {
@@ -21,9 +27,13 @@ namespace Lab3
             }
             return grid;
         }
+        /// <summary>
+        /// Создание поля которое видит пользователь
+        /// </summary>
+        /// <returns></returns>
         static string[,] MaskGrid()
         {
-            string[,] grid = new string[10, 10];
+            string[,] grid = new string[_x, _x];
             for (int x = 0; x < grid.GetLength(0); x++)
             {
                 for (int y = 0; y < grid.GetLength(1); y++)
@@ -33,6 +43,11 @@ namespace Lab3
             }
             return grid;
         }
+        /// <summary>
+        /// Замена лишних цифр на пустые клетки поля или цифр
+        /// </summary>
+        /// <param name="grid">Поле с бомбами</param>
+        /// <returns></returns>
         static int[,] FormatGrid(int[,] grid)
         {
             for (int x = 0; x < grid.GetLength(0); x++)
@@ -128,6 +143,13 @@ namespace Lab3
             }
             return grid;
         }
+        /// <summary>
+        /// Процесс игры
+        /// </summary>
+        /// <param name="mask">Поле которое видит пользователь</param>
+        /// <param name="grid">Поле с расположением мин</param>
+        /// <param name="gameOver">Цикл вайл</param>
+        /// <returns></returns>
         public bool GameProcess(string[,] mask, int[,] grid, bool gameOver)
         {
             FieldMin(mask);
@@ -137,12 +159,29 @@ namespace Lab3
                 int x = 0, y = 0;
                 bool chek = false;
                 bool proverka = false;
-                //Console.Write("Введите номер клетки (Строка, столбец): ");
                 while (!proverka)
                 {
                     proverka = true;
-                    x = InPutCoordinateNew();
-                    y = InPutCoordinateNew();
+                    int schet = 0;
+                    if (schet % 2 == 0)
+                    {
+                        Console.WriteLine("Введите номер строки");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Введите номер столбца");
+                    }
+                    x = Helper.InputInt(1,10);
+                    schet++;
+                    if (schet % 2 == 0)
+                    {
+                        Console.WriteLine("Введите номер строки");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Введите номер столбца");
+                    }
+                    y = Helper.InputInt(1,10);
                     if (!(mask[x - 1, y - 1] == "*"))
                     {
                         Console.WriteLine("Эта ячейка занята");
@@ -168,6 +207,9 @@ namespace Lab3
             }
             return gameOver;
         }
+        /// <summary>
+        /// Игра сапер её основной код
+        /// </summary>
         public void Game()
         {
             Console.Clear();
@@ -178,29 +220,13 @@ namespace Lab3
             game = GameProcess(mask, grid, game);
             Console.ReadKey();
         }
-        public int InPutCoordinateNew()
-        {
-            int inputx = 0;
-            bool enterY = false;
-            while (!enterY)
-            {
-                Console.Write("Введите расположение по (1)Y (2)X: ");
-                enterY = int.TryParse(Console.ReadLine(), out inputx);
-                if (!enterY)
-                {
-                    Console.WriteLine("Вы ввели неверное значение");
-                }
-                else if (inputx > 10 || inputx < 1)
-                {
-                    Console.WriteLine("Введите значение от 1 до 10");
-                    enterY = false;
-                }
-            }
-            return inputx;
-        }
+        /// <summary>
+        /// Вывод поля игры
+        /// </summary>
+        /// <param name="arr">Поле с игрой</param>
         public void FieldMin(string[,] arr)
         {
-            Console.WriteLine("   1 2 3 4 5 6 7 8 9 10 <- x");
+            Console.WriteLine(_xx);
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 Console.Write(i + 1);

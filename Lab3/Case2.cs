@@ -8,6 +8,9 @@ namespace Lab3
 {
     internal class Case2
     {
+        /// <summary>
+        /// Информация о создателе
+        /// </summary>
         public void Info()
         {
             Console.Clear();

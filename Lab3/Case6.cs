@@ -8,6 +8,9 @@ namespace Lab3
 {
     internal class Err
     {
+        /// <summary>
+        /// Текст ошибки
+        /// </summary>
         public void Error()
         {
             Console.WriteLine("\r\nОшибка...\r\n");

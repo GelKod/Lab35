@@ -8,6 +8,9 @@ namespace Lab3
 {
     internal class Kod
     {
+        /// <summary>
+        /// Основная часть программы
+        /// </summary>
         public void Programm()
         {
             bool cikl = false;

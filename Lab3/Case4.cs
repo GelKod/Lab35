@@ -8,12 +8,19 @@ namespace Lab3
 {
     internal class Case4
     {
+        /// <summary>
+        /// Задание для 5 лабораторной работы
+        /// </summary>
         public void NoughtsAndCrosses()
         {
             string[,] arr2 = CreateMas();
             TicTacToe(arr2);
             Console.ReadKey();
         }
+        /// <summary>
+        /// Создание массива 
+        /// </summary>
+        /// <returns></returns>
         public string[,] CreateMas()
         {
             string[,] array = new string[3, 3];
@@ -26,6 +33,10 @@ namespace Lab3
             }
             return array;
         }
+        /// <summary>
+        /// Выполнение крестиков ноликов
+        /// </summary>
+        /// <param name="arr">Поле для крестиков ноликов</param>
         public void TicTacToe(string[,] arr)
         {
             int game = 0;
@@ -50,6 +61,12 @@ namespace Lab3
                 Console.WriteLine("Победила дружба!!!");
             }
         }
+        /// <summary>
+        /// Ввод хода
+        /// </summary>
+        /// <param name="gin">Переменная для указания столбика или строчки</param>
+        /// <param name="mas">Поле с крестиками и ноликами</param>
+        /// <returns></returns>
         public string[,] Move(string gin, string[,] mas)
         {
             int vvodX1 = 0, vvodY1 = 0;
@@ -59,9 +76,25 @@ namespace Lab3
             {
                 proverka = true;
                 int schet = 0;
-                vvodX1 = InPutCoordinate(schet);
+                if (schet % 2 == 0)
+                {
+                    Console.WriteLine("Введите номер строки");
+                }
+                else
+                {
+                    Console.WriteLine("Введите номер столбца");
+                }
+                vvodX1 = Helper.InputInt(0,3);
                 schet++;
-                vvodY1 = InPutCoordinate(schet);
+                if (schet % 2 == 0)
+                {
+                    Console.WriteLine("Введите номер строки");
+                }
+                else
+                {
+                    Console.WriteLine("Введите номер столбца");
+                }
+                vvodY1 = Helper.InputInt(0, 3);
                 if (!(mas[vvodX1 - 1, vvodY1 - 1] == "."))
                 {
                     Console.WriteLine("Эта ячейка занята");
@@ -71,6 +104,10 @@ namespace Lab3
             mas[vvodX1 - 1, vvodY1 - 1] = gin;
             return mas;
         }
+        /// <summary>
+        /// Вывод на экран поля
+        /// </summary>
+        /// <param name="arr">Поле с крестиками и ноликами</param>
         public void Pole(string[,] arr)
         {
             Console.WriteLine("  1 2 3 <- x");
@@ -85,33 +122,13 @@ namespace Lab3
             }
             Console.WriteLine("^\r\n|\r\ny");
         }
-        public int InPutCoordinate(int aboba)
-        {
-            int inputx = 0;
-            bool enterY = false;
-            while (!enterY)
-            {
-                if (aboba % 2 == 0)
-                {
-                    Console.Write("Введите номер строки: ");
-                }
-                else
-                {
-                    Console.Write("Введите номер столбца: ");
-                }
-                enterY = int.TryParse(Console.ReadLine(), out inputx);
-                if (!enterY)
-                {
-                    Console.WriteLine("Вы ввели неверное значение");
-                }
-                if (inputx > 3 || inputx < 1)
-                {
-                    Console.WriteLine("Введите значение от 1 до 3");
-                    enterY = false;
-                }
-            }
-            return inputx;
-        }
+        /// <summary>
+        /// Проверки победы 
+        /// </summary>
+        /// <param name="arr">Поле игры</param>
+        /// <param name="gid">Выбор крестик или нолик</param>
+        /// <param name="game">Число для закрытия игры</param>
+        /// <returns></returns>
         public int ProvPob(string[,] arr, string gid, int game)
         {
             for (int i = 0; i < arr.GetLength(0); i++)

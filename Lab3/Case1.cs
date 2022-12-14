@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-    public static class Case1
+    static class Case1
     {
+        /// <summary>
+        /// Выполнение задания из Лабораторной работы 1
+        /// </summary>
         public static void Exzample()
         {
             Console.Clear();
@@ -16,39 +19,21 @@ namespace Lab3
             Console.WriteLine("Введите значение a and b: ");
             Console.WriteLine("Введите a");
             double a = Helper.InPutDouble();
-            double b = DivisionByZero();
+            double b = Helper.DivisionByZero();
             double f = TheEquation(a, b);
             Happy(f);
             Console.ReadKey();
         }
-        static double DivisionByZero()
-        {
-            double b = 0;
-            bool chek = false;
-            while (!chek)
-            {
-                try
-                {
-                    chek = true;
-                    Console.WriteLine("Введите б не равное 0");
-                    b = Helper.InPutDouble();
-                    int perevod = Convert.ToInt32(b);
-                    int result = 5 / perevod;
-                }
-                catch (DivideByZeroException)
-                {
-                    Console.WriteLine("Вы ввели 0 что делать нельзя!!!");
-                    chek = false;
-                }
-            }
-            return b;
-        }
+        /// <summary>
+        /// Игра с угадыванием
+        /// </summary>
+        /// <param name="f">Ответ задания к 1 лабе</param>
         static void Happy(double f)
         {
             int num;
             for (num = 2; num > -1; num--)
             {
-                int c = Helper.InPutInt();
+                int c = Helper.InputInt();
                 int otvet = Convert.ToInt32(f);
                 if (c == otvet)
                 {
@@ -67,6 +52,12 @@ namespace Lab3
                 Console.WriteLine("Правильный ответ: " + f + "\r\n");
             }
         }
+        /// <summary>
+        /// Вычисление примера к 1 лабораторной
+        /// </summary>
+        /// <param name="l">Переменная а</param>
+        /// <param name="c">Переменная б</param>
+        /// <returns></returns>
         static double TheEquation(double l, double c)
         {
             double qwest = (Math.Pow(Math.Cos(Math.PI), 7.0) + Math.Sqrt(Math.Log(Math.Pow(c, 4.0))))

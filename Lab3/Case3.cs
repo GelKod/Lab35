@@ -8,13 +8,32 @@ namespace Lab3
 {
     internal class Case3
     {
-        private int _kol;
+        private int _n = 10;
+
+        /// <summary>
+        /// Задание для 4 лабораторной работы
+        /// </summary>
         public void Sort()
         {
             Console.Clear();
-            Console.WriteLine("Введите сколько чисел в массиве arr: ");
-            _kol = InPutQuantityMas();
-            int[] array = MasRand(_kol);
+            Console.WriteLine("Выберите способ ввода массива");
+            Console.WriteLine("1 - Количество элементов по умолчанию");
+            Console.WriteLine("2 - Задать количество элементов");
+            bool chek = false;
+            while (!chek)
+            {
+                int k = Helper.InputInt();
+                if (k==2)
+                {
+                    _n = Helper.InputInt();
+                    chek = true;
+                }
+                else if (k==1)
+                {
+                    chek= true;
+                }
+            }
+            int[] array = MasRand(_n);
             OutPutMas(array);
             int[] arr2 = Transfer(array);
             DateTime dateTime = DateTime.Now;
@@ -29,6 +48,11 @@ namespace Lab3
             Console.WriteLine("Время выполнения сортировки Шелла: " + sp2);
             Console.ReadKey();
         }
+        /// <summary>
+        /// Рандомное заполнение массива
+        /// </summary>
+        /// <param name="a">Количество элементов массива</param>
+        /// <returns></returns>
         public int[] MasRand(int a)
         {
             int[] c = new int[a];
@@ -39,21 +63,11 @@ namespace Lab3
             }
             return c;
         }
-        public int InPutQuantityMas()
-        {
-            int a = 0;
-            bool chek = false;
-            while (!chek)
-            {
-                Console.Write("Ввод: ");
-                chek = int.TryParse(Console.ReadLine(), out a);
-                if (a < 1)
-                {
-                    chek = false;
-                }
-            }
-            return a;
-        }
+        /// <summary>
+        /// Сортировка пузырьком
+        /// </summary>
+        /// <param name="a">Массив для сортировки</param>
+        /// <returns></returns>
         public int[] Bubble(int[] a)
         {
             int low;
@@ -71,6 +85,11 @@ namespace Lab3
             }
             return a;
         }
+        /// <summary>
+        /// Сортировка шелла
+        /// </summary>
+        /// <param name="b">Массив для сортировки</param>
+        /// <returns></returns>
         public int[] Shell(int[] b)
         {
             int t;
@@ -93,6 +112,10 @@ namespace Lab3
             }
             return b;
         }
+        /// <summary>
+        /// Вывод массива
+        /// </summary>
+        /// <param name="d">Массив для вывода</param>
         public void OutPutMas(int[] d)
         {
             if (d.Length < 100)
@@ -104,6 +127,11 @@ namespace Lab3
                 Console.WriteLine();
             }
         }
+        /// <summary>
+        /// Копирование массива
+        /// </summary>
+        /// <param name="mas">Массив для копирования</param>
+        /// <returns></returns>
         public int[] Transfer(int[] mas)
         {
             int[] mas2 = new int[mas.Length];
@@ -113,5 +141,6 @@ namespace Lab3
             }
             return mas2;
         }
+
     }
 }
