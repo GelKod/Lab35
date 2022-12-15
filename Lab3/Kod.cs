@@ -33,8 +33,29 @@ namespace Lab3
                         break;
 
                     case ConsoleKey.D3:
-                        Case3 c3 = new Case3();
-                        c3.Sort();
+                        Console.WriteLine("Выберите способ ввода массива");
+                        Console.WriteLine("1 - Количество элементов по умолчанию");
+                        Console.WriteLine("2 - Задать количество элементов");
+                        bool chek = false;
+                        int _n;
+                        while (!chek)
+                        {
+                            int k = Helper.InputInt();
+                            if (k == 2)
+                            {
+                                _n = Helper.InputInt();
+                                Case3 c3 = new Case3(_n);
+                                c3.Sort();
+                                chek = true;
+                            }
+                            else if (k == 1)
+                            {
+                                Case3 c3 = new Case3();
+                                c3.Sort();
+                                chek = true;
+                            }
+                        }
+
                         break;
 
                     case ConsoleKey.D4:

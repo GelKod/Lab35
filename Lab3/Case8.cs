@@ -9,10 +9,31 @@ namespace Lab3
 {
     internal class Case8
     {
+        private string text, firstTwoNumber, secondTwoNumber;
         const string line = "1 - Посчитать количество строчных и прописных букв в строке (отдельно).\r\n" +
-                    "4 - Посчитать количество знаков препинания в строке.\r\n" +
-                    "8 - Вывести на экран, сколько первых символов этих строк совпадают.";
+                   "4 - Посчитать количество знаков препинания в строке.\r\n" +
+                   "8 - Вывести на экран, сколько первых символов этих строк совпадают.";
         const string line2 = "1 - Использовать текст из методички\r\n2 - Ввести свой текст";
+        const string num1 = "Варкалось. Хливкие шорьки\r\nПырялись по наве,\r\n" +
+    "И хрюкотали зелюки,\r\nКак мюмзики в мове.\r\nО бойся Бармаглота, сын!\r\n" +
+    "Он так свирлеп и дик,\r\nА в глуще рымит исполин - Злопастный Брандашмыг.";
+        const string num2= "Быть может, вся Природа\r\n– мозаика цветов?";
+        const string num3= "Быть может, вся Природа\r\n– различность голосов?";
+        public Case8()
+        {
+            text = num1;
+            firstTwoNumber = num2;
+            secondTwoNumber = num3;
+        }
+        public Case8(string str,string str2)
+        {
+            firstTwoNumber = str;
+            secondTwoNumber = str2;
+        }
+        public Case8(string str)
+        {
+            text = str;
+        }
         /// <summary>
         /// Задиние для 6 лабораторной работы
         /// </summary>
@@ -50,11 +71,11 @@ namespace Lab3
         /// </summary>
         /// <param name="stroka">Первая строчка</param>
         /// <param name="stroka2">Вторая строчка</param>
-        public void Number3(string stroka, string stroka2)
+        public void Number3()
         {
             int shodstva = 0;
-            char[] mas2 = stroka.ToCharArray();
-            char[] mas3 = stroka2.ToCharArray();
+            char[] mas2 = firstTwoNumber.ToCharArray();
+            char[] mas3 = secondTwoNumber.ToCharArray();
             if (mas2.Length <= mas3.Length)
             {
                 shodstva=Count(mas2, mas3);
@@ -71,10 +92,10 @@ namespace Lab3
         /// Выполнение 4 номера
         /// </summary>
         /// <param name="stroka">Строчка с текстом</param>
-        public void Number2(string stroka)
+        public void Number2()
         {
             int prepinaniya = 0;
-            char[] mas = stroka.ToCharArray();
+            char[] mas = text.ToCharArray();
             for (int i = 0; i < mas.Length; i++)
             {   
                 if (char.IsPunctuation(mas[i]))
@@ -89,10 +110,10 @@ namespace Lab3
         /// Выполнение 1 номера
         /// </summary>
         /// <param name="stroka">Строчка с текстом</param>
-        public void Number1(string stroka)
+        public void Number1()
         {
             int propis = 0, stroch = 0;
-            char[]mas = stroka.ToCharArray();
+            char[]mas = text.ToCharArray();
             for (int i = 0; i < mas.Length; i++)
             {
                 if (char.IsLower(mas[i]))
@@ -125,11 +146,13 @@ namespace Lab3
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.D1:
-                        Number1(oneNumber);
+                        Case8 c8=new Case8();
+                        c8.Number1();
                         break;
                     case ConsoleKey.D2:
-                        oneNumber = Console.ReadLine();
-                        Number1(oneNumber);
+                        Console.Write("Vvedite stroky: ");
+                        Case8 c9 = new Case8(Console.ReadLine());
+                        c9.Number1();
                         break;
                     default:
                         choos = false;
@@ -143,7 +166,6 @@ namespace Lab3
         public void N2()
         {
             Console.Clear();
-            int prepinaniya = 0;
             Console.WriteLine(line2);
             bool choos = false;
             string oneNumber = Txt();
@@ -155,11 +177,13 @@ namespace Lab3
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.D1:
-                        Number2(oneNumber);
+                        Case8 c8 = new Case8();
+                        c8.Number2();
                         break;
                     case ConsoleKey.D2:
-                        oneNumber = Console.ReadLine();
-                        Number2(oneNumber);
+                        Console.Write("Vvedite stroky: ");
+                        Case8 c9 = new Case8(Console.ReadLine());
+                        c9.Number2();
                         break;
                     default:
                         choos = false;
@@ -175,8 +199,6 @@ namespace Lab3
             Console.Clear();
             Console.WriteLine(line2);
             int shodstva = 0;
-            string firstTwoNumber = "Быть может, вся Природа\r\n– мозаика цветов?";
-            string secondTwoNumber = "Быть может, вся Природа\r\n– различность голосов?";
             Console.WriteLine("Текст из методички: ");
             Console.WriteLine(firstTwoNumber);
             Console.WriteLine(secondTwoNumber);
@@ -187,12 +209,16 @@ namespace Lab3
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.D1:
-                        Number3(firstTwoNumber, secondTwoNumber);
+                        Case8 c8 = new Case8();
+                        c8.Number3();
                         break;
                     case ConsoleKey.D2:
-                        firstTwoNumber = Console.ReadLine();
-                        secondTwoNumber = Console.ReadLine();
-                        Number3(firstTwoNumber, secondTwoNumber);
+                        Console.Write("Vvedite pervyu stroky: ");
+                        string m = Console.ReadLine();
+                        Console.Write("Vvedite vtoryu stroky: ");
+                        string n= Console.ReadLine();
+                        Case8 c9 = new Case8(m,n);
+                        c9.Number3();
                         break;
                     default :
                         choos = false;
@@ -206,9 +232,7 @@ namespace Lab3
         /// <returns></returns>
         public string Txt()
         {
-            string text = "Варкалось. Хливкие шорьки\r\nПырялись по наве,\r\n" +
-                "И хрюкотали зелюки,\r\nКак мюмзики в мове.\r\nО бойся Бармаглота, сын!\r\n" +
-                "Он так свирлеп и дик,\r\nА в глуще рымит исполин - Злопастный Брандашмыг.";
+
             return text;
         }
         /// <summary>

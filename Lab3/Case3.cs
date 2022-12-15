@@ -8,31 +8,22 @@ namespace Lab3
 {
     internal class Case3
     {
-        private int _n = 10;
+        private int _n;
 
+        public Case3()
+        {
+            _n = 15;
+        }
+        public Case3(int a)
+        {
+            _n = a;
+        }
         /// <summary>
         /// Задание для 4 лабораторной работы
         /// </summary>
         public void Sort()
         {
             Console.Clear();
-            Console.WriteLine("Выберите способ ввода массива");
-            Console.WriteLine("1 - Количество элементов по умолчанию");
-            Console.WriteLine("2 - Задать количество элементов");
-            bool chek = false;
-            while (!chek)
-            {
-                int k = Helper.InputInt();
-                if (k==2)
-                {
-                    _n = Helper.InputInt();
-                    chek = true;
-                }
-                else if (k==1)
-                {
-                    chek= true;
-                }
-            }
             int[] array = MasRand(_n);
             OutPutMas(array);
             int[] arr2 = Transfer(array);
